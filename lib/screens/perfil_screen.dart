@@ -60,12 +60,10 @@ class PerfilScreen extends StatelessWidget {
           BannerInformacion(titulo: 'Fecha expiración', valor: fecha),
           BotonPrimario(
               onPressed: () {
-                final UiProvider uiProvider =
-                    Provider.of<UiProvider>(context, listen: false);
                 mostrarAlerta(
                     context,
                     AlertaSiNo(
-                        title: '¿Deseas salir?',
+                        title: '¿Deseas cerrar la sesión?',
                         onPressendNo: () => Navigator.pop(context),
                         onPressendSi: () {
                           Preferences.codigo = '';
@@ -74,22 +72,19 @@ class PerfilScreen extends StatelessWidget {
                         },
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
-                          children: [
+                          children: const [
                             Padding(
-                              padding: const EdgeInsets.all(8.0),
+                              padding: EdgeInsets.all(8.0),
                               child: Text(
-                                uiProvider.saveCode
-                                    ? 'Si sales ahora deberás ingresar nuevamente tus datos. '
-                                    : 'Esperamos que vuelvas pronto ',
+                                'Estas apunto de cerrar la sesión, ¿deseas continuar?',
                                 textAlign: TextAlign.center,
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.w500),
+                                style: TextStyle(fontWeight: FontWeight.w500),
                               ),
                             )
                           ],
                         )));
               },
-              child: const Text('Salir'))
+              child: const Text('Cerrar sesión'))
         ],
       ),
     );

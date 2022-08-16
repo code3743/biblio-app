@@ -21,6 +21,7 @@ class MyStateApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => AuthService()),
+        ChangeNotifierProvider(create: (context) => AuthService()),
         ChangeNotifierProvider(create: (context) => UiProvider()),
         ChangeNotifierProvider(create: (context) => EstudianteProvider())
       ],

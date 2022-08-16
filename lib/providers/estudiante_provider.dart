@@ -9,6 +9,15 @@ import '../utils/capitalizar_nombre.dart';
 class EstudianteProvider extends ChangeNotifier {
   late Opac _informacion;
 
+  bool _actualizarTodoLoad = false;
+
+  bool get actualizarTodoLoad => _actualizarTodoLoad;
+
+  set actualizarTodoLoad(bool estado) {
+    _actualizarTodoLoad = estado;
+    notifyListeners();
+  }
+
   Opac get informacion => _informacion;
 
   set informacion(Opac informacion) {
