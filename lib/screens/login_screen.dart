@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:opac_univalle/shared_preferences/preferences.dart';
 
 import 'package:provider/provider.dart';
 
@@ -121,7 +120,6 @@ class _Formulario extends StatelessWidget {
               fit: BoxFit.contain,
             ),
             TextFormPersonalizado(
-              initialValue: Preferences.codigo,
               validator: (value) {
                 RegExp regExp = RegExp(r'^[0-9]{5,16}$');
                 return regExp.hasMatch(value ?? '')

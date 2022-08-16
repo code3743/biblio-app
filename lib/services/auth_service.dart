@@ -7,20 +7,24 @@ import 'package:opac_univalle/shared_preferences/preferences.dart';
 class AuthService extends ChangeNotifier {
   final String _baseUrl = 'api-univalle.herokuapp.com';
 
-  Future<Opac> obtenerInformacion() async {
+  Future<dynamic> obtenerInformacion() async {
     String codigo = Preferences.codigo!;
-    final Uri url = Uri.https(_baseUrl, '/api/opac', {'codigo': codigo});
-    try {
-      final resp = await http.get(url);
 
-      if (resp.statusCode == 200) {
-        return opacFromJson(resp.body);
+    if (codigo != '') {
+      final Uri url = Uri.https(_baseUrl, '/api/opac', {'codigo': codigo});
+
+      try {
+        final resp = await http.get(url);
+
+        if (resp.statusCode == 200) {
+          return opacFromJson(resp.body);
+        }
+        throw 'Estamos presentando fallas';
+      } catch (e) {
+        rethrow;
       }
-
-      throw 'Error en la conexión';
-    } catch (e) {
-      rethrow;
     }
+    return 0;
   }
 
   Future<Opac> autenticar(String codigo, bool saveCode) async {

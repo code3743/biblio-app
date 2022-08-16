@@ -4,6 +4,8 @@ import 'package:opac_univalle/models/opac_models.dart';
 
 import 'package:opac_univalle/shared_preferences/preferences.dart';
 
+import '../utils/capitalizar_nombre.dart';
+
 class EstudianteProvider extends ChangeNotifier {
   late Opac _informacion;
 
@@ -11,7 +13,6 @@ class EstudianteProvider extends ChangeNotifier {
 
   set informacion(Opac informacion) {
     _informacion = informacion;
-    Preferences.nombre = _informacion.nombre;
-    notifyListeners();
+    Preferences.nombre = capitalizarNombre(_informacion.nombre);
   }
 }

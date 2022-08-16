@@ -7,6 +7,11 @@ class Preferences {
     _preferences = await SharedPreferences.getInstance();
   }
 
+  static bool? get saveCode => _preferences.getBool('saveCode');
+  static set saveCode(bool? code) {
+    _preferences.setBool('saveCode', code!);
+  }
+
   static String? get codigo => _preferences.getString('codigo');
   static set codigo(String? valor) {
     _preferences.setString('codigo', valor!);

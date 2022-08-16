@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:opac_univalle/shared_preferences/preferences.dart';
+import 'package:opac_univalle/utils/capitalizar_nombre.dart';
 import 'package:provider/provider.dart';
 
 import 'package:opac_univalle/providers/providers.dart';
@@ -21,7 +23,9 @@ class HomeScreen extends StatelessWidget {
           child: Column(
         children: [
           AppBarPersonalizado(
-            nombre: estudianteProvider.informacion.nombre,
+            nombre: Preferences.codigo != ''
+                ? Preferences.nombre!
+                : capitalizarNombre(estudianteProvider.informacion.nombre),
           ),
           Expanded(
               child: uiProvider.index == 0
