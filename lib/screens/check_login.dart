@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:opac_univalle/shared_preferences/preferences.dart';
 import 'package:provider/provider.dart';
 
 import 'package:opac_univalle/screens/screens.dart';
 import 'package:opac_univalle/providers/estudiante_provider.dart';
 import 'package:opac_univalle/services/auth_service.dart';
 import 'package:opac_univalle/themes/app_theme.dart';
+import 'package:opac_univalle/shared_preferences/preferences.dart';
 
 class CheckLogin extends StatelessWidget {
   const CheckLogin({Key? key}) : super(key: key);
@@ -13,8 +13,7 @@ class CheckLogin extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final AuthService authService = Provider.of<AuthService>(context);
-    final EstudianteProvider estudianteProvider =
-        Provider.of<EstudianteProvider>(context);
+
     return Scaffold(
         backgroundColor: Colors.white,
         body: FutureBuilder(
@@ -22,7 +21,9 @@ class CheckLogin extends StatelessWidget {
           builder: (context, AsyncSnapshot snapshot) {
             if (snapshot.hasData) {
               if (snapshot.data != 0) {
-                estudianteProvider.informacion = snapshot.data!;
+                final EstudianteProvider estudianteProvider =
+                    Provider.of<EstudianteProvider>(context, listen: false);
+                estudianteProvider.init(snapshot.data!);
                 Future.microtask(() => Navigator.pushReplacement(
                     context,
                     PageRouteBuilder(

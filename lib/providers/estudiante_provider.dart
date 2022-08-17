@@ -9,6 +9,11 @@ import '../utils/capitalizar_nombre.dart';
 class EstudianteProvider extends ChangeNotifier {
   late Opac _informacion;
 
+  void init(Opac informacion) {
+    _informacion = informacion;
+    Preferences.nombre = capitalizarNombre(_informacion.nombre);
+  }
+
   bool _actualizarTodoLoad = false;
 
   bool get actualizarTodoLoad => _actualizarTodoLoad;
@@ -22,6 +27,6 @@ class EstudianteProvider extends ChangeNotifier {
 
   set informacion(Opac informacion) {
     _informacion = informacion;
-    Preferences.nombre = capitalizarNombre(_informacion.nombre);
+    notifyListeners();
   }
 }

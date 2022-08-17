@@ -143,9 +143,8 @@ class _Formulario extends StatelessWidget {
                           Provider.of<EstudianteProvider>(context,
                               listen: false);
                       try {
-                        estudianteProvider.informacion =
-                            await authService.autenticar(
-                                loginProvider.codigo, uiProvider.saveCode);
+                        estudianteProvider.init(await authService.autenticar(
+                            loginProvider.codigo, uiProvider.saveCode));
                         redireccionar('home');
                       } catch (error) {
                         loginProvider.isLoading = false;

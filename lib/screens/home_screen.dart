@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:opac_univalle/shared_preferences/preferences.dart';
-import 'package:opac_univalle/utils/capitalizar_nombre.dart';
 import 'package:provider/provider.dart';
 
+import 'package:opac_univalle/screens/screens.dart';
+import 'package:opac_univalle/utils/capitalizar_nombre.dart';
 import 'package:opac_univalle/providers/providers.dart';
-import 'package:opac_univalle/screens/historial_screen.dart';
-import 'package:opac_univalle/screens/perfil_screen.dart';
-import 'package:opac_univalle/screens/prestamo_screen.dart';
 import 'package:opac_univalle/themes/app_theme.dart';
 import 'package:opac_univalle/widgets/widgets.dart';
 
@@ -23,31 +20,12 @@ class HomeScreen extends StatelessWidget {
           child: Column(
         children: [
           AppBarPersonalizado(
-            nombre: Preferences.codigo != ''
-                ? Preferences.nombre!
-                : capitalizarNombre(estudianteProvider.informacion.nombre),
+            nombre: capitalizarNombre(estudianteProvider.informacion.nombre),
           ),
           Expanded(
-              child: uiProvider.index == 0
-                  ? PerfilScreen(
-                      fecha: estudianteProvider.informacion.fechaExpiracion,
-                      multa: estudianteProvider.informacion.multa,
-                      historialLibro: estudianteProvider
-                          .informacion.historialPrestamos.length
-                          .toString(),
-                      librosPrestamo: estudianteProvider
-                          .informacion.librosPrestados.length
-                          .toString(),
-                    )
-                  : uiProvider.index == 1
-                      ? PrestamoScreen(
-                          librosPrestados:
-                              estudianteProvider.informacion.librosPrestados,
-                        )
-                      : HistorialScreen(
-                          historalPrestamo:
-                              estudianteProvider.informacion.historialPrestamos,
-                        )),
+              child: Body(
+                  index: uiProvider.index,
+                  estudianteProvider: estudianteProvider))
         ],
       )),
       bottomNavigationBar: MenuNavegacion(
@@ -55,16 +33,50 @@ class HomeScreen extends StatelessWidget {
             currentIndex: uiProvider.index,
             selectedItemColor: AppTheme.primaryColor,
             selectedIconTheme: const IconThemeData(size: 30),
+            unselectedItemColor: Colors.grey,
+            unselectedLabelStyle: const TextStyle(color: Colors.grey),
+            showUnselectedLabels: true,
             onTap: (index) => uiProvider.index = index,
             items: const [
               BottomNavigationBarItem(
                   icon: Icon(Icons.home_rounded), label: 'Inicio'),
               BottomNavigationBarItem(
-                  icon: Icon(Icons.book), label: 'En prestamo'),
+                  icon: Icon(Icons.book), label: 'Prestamo'),
               BottomNavigationBarItem(
-                  icon: Icon(Icons.history_rounded), label: 'Historial')
+                  icon: Icon(Icons.history_rounded), label: 'Historial'),
             ]),
       ),
     );
+  }
+}
+
+class Body extends StatelessWidget {
+  final int index;
+  final EstudianteProvider estudianteProvider;
+  const Body({Key? key, required this.index, required this.estudianteProvider})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    switch (index) {
+      case 0:
+        return PerfilScreen(
+          fecha: estudianteProvider.informacion.fechaExpiracion,
+          multa: estudianteProvider.informacion.multa,
+          historialLibro: estudianteProvider
+              .informacion.historialPrestamos.length
+              .toString(),
+          librosPrestamo:
+              estudianteProvider.informacion.librosPrestados.length.toString(),
+        );
+      case 1:
+        return PrestamoScreen(
+          librosPrestados: estudianteProvider.informacion.librosPrestados,
+        );
+      default:
+        return HistorialScreen(
+          historalPrestamo: estudianteProvider.informacion.historialPrestamos,
+        );
+    }
   }
 }

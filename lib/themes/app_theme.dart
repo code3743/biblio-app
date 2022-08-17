@@ -10,8 +10,13 @@ class AppTheme {
   static Color backgroundColor = const Color(0xFFE4E4E4);
   static ThemeData appThemeLight = ThemeData.light().copyWith(
     primaryColor: primaryColor,
+    appBarTheme: const AppBarTheme(
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.black,
+        toolbarHeight: 70,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(bottomLeft: Radius.circular(30)))),
     scaffoldBackgroundColor: backgroundColor,
-    appBarTheme: const AppBarTheme(backgroundColor: Colors.white),
     inputDecorationTheme: InputDecorationTheme(
         enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(15),
