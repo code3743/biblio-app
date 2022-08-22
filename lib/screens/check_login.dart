@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'package:opac_univalle/screens/problemas.dart';
 import 'package:opac_univalle/screens/screens.dart';
 import 'package:opac_univalle/providers/estudiante_provider.dart';
 import 'package:opac_univalle/services/auth_service.dart';
@@ -50,7 +51,7 @@ class CheckLogin extends StatelessWidget {
                   PageRouteBuilder(
                     transitionDuration: const Duration(seconds: 0),
                     pageBuilder: (_, __, ___) {
-                      return const LoginScreen();
+                      return const ProblemasScreen();
                     },
                   )));
             }
