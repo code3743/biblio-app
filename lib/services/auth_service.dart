@@ -8,7 +8,7 @@ class AuthService extends ChangeNotifier {
   final String _baseUrl = 'api-univalle.herokuapp.com';
 
   Future<dynamic> obtenerInformacion() async {
-    String codigo = Preferences.codigo!;
+    String codigo = Preferences.codigo ?? '';
 
     if (codigo != '') {
       final Uri url = Uri.https(_baseUrl, '/api/opac', {'codigo': codigo});

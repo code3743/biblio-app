@@ -80,7 +80,7 @@ class Loader extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Text(
-                    Preferences.codigo != ''
+                    (Preferences.nombre != null) && (Preferences.nombre != '')
                         ? '¡Hola ${Preferences.nombre}! '
                         : '¡Hola Compa!',
                     style: TextStyle(
