@@ -1,23 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:opac_univalle/models/opac_models.dart';
 
 import 'package:opac_univalle/themes/app_theme.dart';
+import 'package:opac_univalle/utils/mostrar_alerta.dart';
+import 'package:opac_univalle/widgets/alerta_si_no.dart';
 
 class InformacionLibro extends StatelessWidget {
-  final String titulo;
-  final String multa;
-  final String fecha;
-  final String codigo;
-
+  final LibrosPrestado librosPrestado;
   const InformacionLibro({
     Key? key,
-    required this.titulo,
-    required this.multa,
-    required this.fecha,
-    required this.codigo,
+    required this.librosPrestado,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    String? fechaActulizada;
+
     return Container(
       width: double.infinity,
       height: 250,
@@ -37,21 +35,14 @@ class InformacionLibro extends StatelessWidget {
                 children: [
                   Expanded(
                       child: Text(
-                    'Código: $codigo',
+                    'Código: ${librosPrestado.codigo}',
                     style: const TextStyle(
                         color: Colors.white,
                         fontSize: 18,
                         overflow: TextOverflow.ellipsis,
                         fontWeight: FontWeight.w600),
                   )),
-                  ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.white),
-                      onPressed: () {},
-                      child: Text(
-                        'Actulizar',
-                        style: TextStyle(color: AppTheme.primaryColor),
-                      ))
+                  ActualizarLibro(librosPrestado: librosPrestado)
                 ],
               ),
             ),
@@ -81,7 +72,7 @@ class InformacionLibro extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(horizontal: 35),
                         child: Center(
                           child: Text(
-                            titulo,
+                            librosPrestado.titulo,
                             maxLines: 4,
                             style: const TextStyle(
                                 overflow: TextOverflow.ellipsis,
@@ -96,14 +87,14 @@ class InformacionLibro extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Text(
-                          fecha,
+                          fechaActulizada ?? librosPrestado.fecha,
                           style: const TextStyle(
                               fontSize: 18,
                               overflow: TextOverflow.ellipsis,
                               fontWeight: FontWeight.w600),
                         ),
                         Text(
-                          'Multa: $multa',
+                          'Multa: ${librosPrestado.multa}',
                           style: const TextStyle(
                               fontSize: 18,
                               overflow: TextOverflow.ellipsis,
@@ -122,5 +113,68 @@ class InformacionLibro extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class ActualizarLibro extends StatelessWidget {
+  const ActualizarLibro({
+    Key? key,
+    required this.librosPrestado,
+  }) : super(key: key);
+
+  final LibrosPrestado librosPrestado;
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+        style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
+        onPressed: () {
+          mostrarAlerta(
+              context,
+              AlertaSiNo(
+                  title: '¿Deseas actualizar el material?',
+                  onPressendSi: () {},
+                  onPressendNo: () {
+                    Navigator.pop(context);
+                  },
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        librosPrestado.codigo,
+                        style: const TextStyle(
+                            fontSize: 18,
+                            overflow: TextOverflow.ellipsis,
+                            fontWeight: FontWeight.w600),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Text(
+                        'Titulo',
+                        style: TextStyle(
+                            color: AppTheme.primaryColorDark,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w500),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Text(
+                        librosPrestado.titulo,
+                        maxLines: 4,
+                        style: const TextStyle(
+                            overflow: TextOverflow.ellipsis,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20),
+                        textAlign: TextAlign.center,
+                      )
+                    ],
+                  )));
+        },
+        child: Text(
+          'Actulizar',
+          style: TextStyle(color: AppTheme.primaryColor),
+        ));
   }
 }

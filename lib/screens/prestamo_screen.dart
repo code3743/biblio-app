@@ -27,10 +27,7 @@ class PrestamoScreen extends StatelessWidget {
               itemCount: librosPrestados.length,
               itemBuilder: (context, index) {
                 return InformacionLibro(
-                    titulo: librosPrestados[index].titulo,
-                    multa: librosPrestados[index].multa,
-                    fecha: librosPrestados[index].fecha,
-                    codigo: librosPrestados[index].codigo);
+                   librosPrestado: librosPrestados[index],);
               },
             ),
           ),
