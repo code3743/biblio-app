@@ -45,7 +45,8 @@ class InformacionLibro extends StatelessWidget {
                         fontWeight: FontWeight.w600),
                   )),
                   ElevatedButton(
-                      style: ElevatedButton.styleFrom(primary: Colors.white),
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.white),
                       onPressed: () {},
                       child: Text(
                         'Actulizar',

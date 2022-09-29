@@ -20,7 +20,7 @@ class BotonPrimario extends StatelessWidget {
         width: width ?? MediaQuery.of(context).size.width * .6,
         child: ElevatedButton(
             style: ElevatedButton.styleFrom(
-                primary: AppTheme.primaryColor,
+                backgroundColor: AppTheme.primaryColor,
                 padding: const EdgeInsets.all(15),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15))),
