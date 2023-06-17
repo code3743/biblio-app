@@ -1,6 +1,6 @@
 {
-    "name": "opac_univalle",
-    "short_name": "opac_univalle",
+    "name": "biblio_app",
+    "short_name": "biblio_app",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
