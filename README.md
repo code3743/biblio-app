@@ -1,16 +1,15 @@
-# biblio_app
+# BiblioApp
 
-A new Flutter project.
+Aplicación movil que permite extender funcionalidades del sistema OPAC de la Universidad del Valle haciendo uso de una API no oficail
 
-## Getting Started
+- [OPAC API Univalle](https://github.com/code3743/OPAC-Univalle-API)
 
-This project is a starting point for a Flutter application.
+## Funciones
 
-A few resources to get you started if this is your first Flutter project:
+- Estado de deuda
+- Busqueda palabra clave, ISBN y OID
+- Renovar libros en prestamo
+- Lista de deseos
+- Crear citas en formato APA 7
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
